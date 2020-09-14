@@ -2,6 +2,37 @@ nav img{
     width: 150px;
 }
 
-.bg-header{
+.bg-base{
     background-color: #F3E9F1;
+}
+
+.imgTeddy{
+    width: 200px;
+}
+
+
+.divTeddy{
+    margin: 10px auto;
+    padding: 10px;
+    border: solid #e8b573  1px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+}
+.divTeddy:hover{
+    transition: 200ms;
+    transform: scale(1.02);
+}
+
+.divTeddy p{
+    width : 100%;
+}
+
+.divTeddy img{
+    margin: 0 auto 5px;
+}
+
+.divTeddy a{
+    margin: auto;
 }
