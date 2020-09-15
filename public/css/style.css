@@ -11,7 +11,7 @@ nav img{
 }
 
 
-.divTeddy{
+.divTeddies, .divTeddy{
     margin: 10px auto;
     padding: 10px;
     border: solid #e8b573  1px;
@@ -20,19 +20,19 @@ nav img{
     flex-wrap: wrap;
     text-align: center;
 }
-.divTeddy:hover{
+.divTeddies:hover{
     transition: 200ms;
     transform: scale(1.02);
 }
 
-.divTeddy p{
+.divTeddies p, .divTeddy p{
     width : 100%;
 }
 
-.divTeddy img{
+.divTeddies img, .divTeddy img{
     margin: 0 auto 5px;
 }
 
-.divTeddy a{
+.divTeddies a, .divTeddy a{
     margin: auto;
 }

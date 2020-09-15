@@ -1,11 +1,15 @@
 const getTeddies = async() => {
     const response = await fetch("/api/teddies")
     const data = await response.json()
-    data.map(val => addTeddy(val))
+    data.map(val => addTeddies(val))
        console.log(data)
 }
 
-const addTeddy = (teddy) => {
+const price = number => {
+    return number.toString().substr(0, 2) + "," + number.toString().substr(2, 2) + "€"
+}
+
+const addTeddies = (teddy) => {
     //console.log(teddy)
 
     //recuperation de l'id de la div
@@ -14,7 +18,7 @@ const addTeddy = (teddy) => {
 
     //creation des elements
     const div = document.createElement("div");
-    div.setAttribute("class", "divTeddy bg-base")
+    div.setAttribute("class", "divTeddies bg-base")
 
     const pName = document.createElement("p");
     pName.innerHTML = "<strong>" + teddy.name  + "</strong><br>"
@@ -23,10 +27,7 @@ const addTeddy = (teddy) => {
     pDescription.innerHTML = teddy.description
 
     const pPrice = document.createElement("p");
-    const price = number => {
-        const formatPrice = number.toString().substr(0,2) + "," + number.toString().substr(2, 2) + "€"
-        return formatPrice
-    }
+
     pPrice.textContent = "prix : " + price(teddy.price);
 
     const img = document.createElement("img");
@@ -35,8 +36,7 @@ const addTeddy = (teddy) => {
     img.setAttribute('class', "imgTeddy");
 
     const a = document.createElement("a");
-    a.setAttribute("id", teddy._id)
-    a.setAttribute("href", "../produit.html")
+    a.setAttribute("href", "../produit.html?id=" + teddy._id)
     a.innerHTML = "<p>Voir le produit</p>"
 
     // regroupement des éléments dans une div
@@ -54,9 +54,5 @@ const addTeddy = (teddy) => {
 
 }
 
+
 getTeddies();
-
-
-
-const num = "1234";
-console.log(num.toString().substr(0, 4))
