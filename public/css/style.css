@@ -1,38 +1,39 @@
-nav img{
+nav img {
     width: 150px;
 }
 
-.bg-base{
+.bg-base {
     background-color: #F3E9F1;
 }
 
-.imgTeddy{
+.imgTeddy {
     width: 200px;
 }
 
 
-.divTeddies, .divTeddy{
+.divTeddies, .divTeddy {
     margin: 10px auto;
     padding: 10px;
-    border: solid #e8b573  1px;
+    border: solid #e8b573 1px;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     text-align: center;
 }
-.divTeddies:hover{
+
+.divTeddies:hover {
     transition: 200ms;
     transform: scale(1.02);
 }
 
-.divTeddies p, .divTeddy p{
-    width : 100%;
+.divTeddies p, .divTeddy p {
+    width: 100%;
 }
 
-.divTeddies img, .divTeddy img{
+.divTeddies img, .divTeddy img {
     margin: 0 auto 5px;
 }
 
-.divTeddies a, .divTeddy a{
+.divTeddies a, .divTeddy a {
     margin: auto;
 }
