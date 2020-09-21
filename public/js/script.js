@@ -2,6 +2,7 @@ const addTeddies = (teddy) => {
     //recuperation de l'id de la div
     const teddiesDiv = document.getElementById("teddies");
 
+
     //Création des élements
     const div = creatElem("div", null, [{attribut: "class", content: "divTeddies bg-base"}]);
     const pName = creatElem("p", "<strong>" + teddy.name + "</strong><br>");

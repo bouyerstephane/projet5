@@ -1,6 +1,5 @@
 const addTeddies = (teddy) => {
     if (teddy._id === getUrl()) {
-
         //recuperation de l'id de la div
         const teddiesDiv = document.getElementById("teddy");
         console.log(teddiesDiv)
@@ -18,7 +17,7 @@ const addTeddies = (teddy) => {
         const selectColors = creatElem("select", null, [{attribut: "id", content: "selectColors"}])
         teddy.colors.map(val => getColors(val, selectColors))
         const selectQuantity = creatElem("select", null, [{attribut: "id", content: "selectQuantities"}])
-        quantity(selectQuantity, 11)
+        optionsQuantity(selectQuantity, 11)
         const a = creatElem("a", "ajouter au panier", [{attribut: "href", content: "../panier.html"}, {
             attribut: "id",
             content: "submit"
@@ -42,29 +41,5 @@ const addTeddies = (teddy) => {
     }
 }
 
-const submit = (id) => {
-    const send = document.getElementById("submit");
-    send.addEventListener("click", () => {
-        const selectColor = document.getElementById("selectColors");
-        const indexColor = selectColor.selectedIndex
-        const selectedColor = selectColor.options[indexColor].value
-        const selectQuantity = document.getElementById("selectQuantities");
-        const indexQuantity = selectQuantity.selectedIndex
-        const selectedQuantity = selectQuantity.options[indexQuantity].value
 
-
-        const addArticle = {"id": id, "qty": selectedQuantity, "color": selectedColor};
-
-
-        if (JSON.parse(localStorage.getItem("basket") === null)) {
-            const init = [];
-            init.push(addArticle)
-            localStorage.setItem("basket", JSON.stringify(init));
-        } else {
-            const basket = JSON.parse(localStorage.getItem("basket"));
-            basket.push(addArticle)
-            localStorage.setItem("basket", JSON.stringify(basket));
-        }
-    })
-}
 getTeddies()
