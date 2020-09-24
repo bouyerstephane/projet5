@@ -2,18 +2,27 @@ const getTeddies = async () => {
     const response = await fetch("/api/teddies/")
     const data = await response.json()
     data.map(val => addTeddies(val))
-    // console.log(data)
+     //console.log(data)
 }
 
-const getUrl = () => {
+const getUrl = async () => {
     const strURL = window.location.href;
     const url = new URL(strURL);
-    return url.searchParams.get("id");
+    const response = await fetch("/api/teddies/" + url.searchParams.get("id"))
+    const data = await response.json()
+
+    if (url.searchParams.get("id") === data._id ){
+        return url.searchParams.get("id");
+    }else{
+       // console.log(url.searchParams.get("id"))
+        window.location.href = "error.html"
+    }
 
 }
 
-const price = number => {
-    return number.toString().substr(0, 2) + "," + number.toString().substr(2, 2) + "€";
+const price = (value, multipl = 1) => {
+    const number = value * multipl
+    return number.toString().substr(0, number.toString().length -2) + "," + number.toString().substr(number.toString().length -2, 2) + "€";
 }
 
 const creatElem = (tag, content, attribut) => {
@@ -53,15 +62,19 @@ const submit = (id) => {
         const indexQuantity = selectQuantity.selectedIndex;
         const selectedQuantity = selectQuantity.options[indexQuantity].value;
 
-        /////////////////////////
-
-        const addArticle = {"id": id, "qty": selectedQuantity, "color": selectedColor};
-
-        let basket = JSON.parse(localStorage.getItem("basket"));
-        if (basket === null) {
-            basket = [];
-        }
-        basket.push(addArticle);
-        localStorage.setItem("basket", JSON.stringify(basket));
+        addArticle(id, selectedQuantity, selectedColor)
     })
+}
+
+const addArticle = (id, selectedQuantity, selectedColor) => {
+    const article = {"id": id, "qty": selectedQuantity, "color": selectedColor}
+
+
+    let basket = JSON.parse(localStorage.getItem("basket"));
+    if (basket === null) {
+        basket = [];
+    }
+    basket.push(article);
+    localStorage.setItem("basket", JSON.stringify(basket));
+
 }

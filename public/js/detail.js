@@ -1,5 +1,5 @@
-const addTeddies = (teddy) => {
-    if (teddy._id === getUrl()) {
+const addTeddies = async (teddy) => {
+    if (teddy._id === await getUrl()) {
         //recuperation de l'id de la div
         const teddiesDiv = document.getElementById("teddy");
         console.log(teddiesDiv)

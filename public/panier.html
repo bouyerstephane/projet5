@@ -38,15 +38,30 @@
 <div class="container">
     <section class="row my-3">
         <div class="col">
-            <h1 class="text-center">Bienvenue chez Orinoco !</h1>
+            <h1 class="text-center">Panier</h1>
         </div>
     </section>
     <section class="row">
 
-        <article id="basket">
-            <button id="clear">Clear localstorage</button>
+        <article class="col-12" id="basket">
+            <button id="clear" class="bg-base ">Vider le panier</button>
         </article>
+        <article class="col-12 form">
+            <form action="">
+                <label for="firstName">Votre prénom</label>
+                <input id="firstName" type="text" required>
+                <label for="lastName">Votre nom</label>
+                <input id="lastName" type="text" required>
+                <label for="email">votre Email</label>
+                <input id="email" type="email" required>
+                <label for="adress">votre adresse</label>
+                <input id="adress" type="text" required>
+                <label for="city">votre ville</label>
+                <input id="city" type="text" required>
+                <input id="submit" type="submit" value="Envoyer">
 
+            </form>
+        </article>
     </section>
 
     <footer class="row">
