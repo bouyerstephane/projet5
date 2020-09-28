@@ -2,11 +2,10 @@ const addTeddies = async (teddy) => {
     if (teddy._id === await getUrl()) {
         //recuperation de l'id de la div
         const teddiesDiv = document.getElementById("teddy");
-        console.log(teddiesDiv)
+        //console.log(teddiesDiv)
 
         //creation des elements
         const div = creatElem("div", null, [{attribut: "class", content: "divTeddy bg-base"}]);
-
         const pName = creatElem("p", "<strong>" + teddy.name + "</strong><br>")
         const pDescription = creatElem("p", teddy.description);
         const pPrice = creatElem("p", "prix : " + price(teddy.price));
@@ -36,7 +35,8 @@ const addTeddies = async (teddy) => {
 
         teddiesDiv.appendChild(div)
 
-        submit(teddy._id)
+        submit(teddy._id,teddy.price)
+
 
     }
 }

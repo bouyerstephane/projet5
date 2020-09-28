@@ -38,6 +38,34 @@ nav img {
     margin: auto;
 }
 
-button{
+button {
     margin: auto;
+}
+
+#clear{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+label{
+    min-width: 120px;
+}
+
+input{
+    width: 200px;
+    border :solid #e8b573 1px;
+}
+
+input:focus {
+    outline: none;
+    border: solid #e8b573 3px;
+}
+
+#submit{
+    display: block;
+    margin: 0 auto;
+}
+
+.spanError{
+    color: red;
 }

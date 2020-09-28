@@ -1,39 +1,38 @@
 const getTeddies = async () => {
-    const response = await fetch("/api/teddies/")
-    const data = await response.json()
-    data.map(val => addTeddies(val))
-     //console.log(data)
+    const response = await fetch("/api/teddies/");
+    const data = await response.json();
+    data.map(val => addTeddies(val));
+    //console.log(data)
 }
 
 const getUrl = async () => {
     const strURL = window.location.href;
     const url = new URL(strURL);
-    const response = await fetch("/api/teddies/" + url.searchParams.get("id"))
-    const data = await response.json()
+    const response = await fetch("/api/teddies/" + url.searchParams.get("id"));
+    const data = await response.json();
+    if (data._id) {
 
-    if (url.searchParams.get("id") === data._id ){
         return url.searchParams.get("id");
-    }else{
-       // console.log(url.searchParams.get("id"))
-        window.location.href = "error.html"
+    } else {
+        window.location.href = "error.html";
     }
 
 }
 
 const price = (value, multipl = 1) => {
-    const number = value * multipl
-    return number.toString().substr(0, number.toString().length -2) + "," + number.toString().substr(number.toString().length -2, 2) + "€";
+    const number = value * multipl;
+    return number.toString().substr(0, number.toString().length - 2) + "," + number.toString().substr(number.toString().length - 2, 2) + "€";
 }
 
 const creatElem = (tag, content, attribut) => {
-    const element = document.createElement(tag)
-    if (content != null) {
-        element.innerHTML = content
+    const element = document.createElement(tag);
+    if (content) {
+        element.innerHTML = content;
     }
-    if (attribut != null) {
-        setAttr(element, attribut)
+    if (attribut) {
+        setAttr(element, attribut);
     }
-    return element
+    return element;
 }
 
 const setAttr = (element, value) => {
@@ -52,7 +51,7 @@ const optionsQuantity = (select, qty) => {
     }
 }
 
-const submit = (id) => {
+const submit = (id,price) => {
     const send = document.getElementById("submit");
     send.addEventListener("click", () => {
         const selectColor = document.getElementById("selectColors");
@@ -62,19 +61,42 @@ const submit = (id) => {
         const indexQuantity = selectQuantity.selectedIndex;
         const selectedQuantity = selectQuantity.options[indexQuantity].value;
 
-        addArticle(id, selectedQuantity, selectedColor)
+        addArticle(id, selectedQuantity, selectedColor,price)
     })
 }
 
-const addArticle = (id, selectedQuantity, selectedColor) => {
-    const article = {"id": id, "qty": selectedQuantity, "color": selectedColor}
-
-
+const addArticle = (id, selectedQuantity, selectedColor, price) => {
     let basket = JSON.parse(localStorage.getItem("basket"));
+    let totalPrice = JSON.parse(localStorage.getItem("totalPrice"));
+
+
+    if (totalPrice === null) {
+        totalPrice = [{"price": +price * +selectedQuantity}];
+    } else{
+        totalPrice[0].price += +price * +selectedQuantity;
+
+    }
+
     if (basket === null) {
         basket = [];
     }
-    basket.push(article);
+
+    if (basket.some(articles => articles.id === id && articles.color === selectedColor)){
+        basket = basket.map(article => {
+            if (article.id === id && article.color === selectedColor ){
+                article.qty += +selectedQuantity
+            }
+            return article
+        })
+    }else{
+        const article = {"id": id, "qty": +selectedQuantity, "color": selectedColor}
+        basket.push(article);
+    }
+
+
+
+
     localStorage.setItem("basket", JSON.stringify(basket));
+    localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
 
 }
