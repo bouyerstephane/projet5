@@ -1,7 +1,7 @@
 const storage = JSON.parse(localStorage.getItem("basket"))
 const panier = document.getElementById("basket");
 
-if (storage === null) {
+if (storage === null || storage.length === 0) {
     const div = creatElem("div", null, [{attribut: "class", content: "divTeddies bg-base"}]);
     const p = creatElem("p", "Le panier est vide");
     div.appendChild(p);
@@ -63,8 +63,9 @@ inputSubmit.addEventListener("click", (event) => {
     document.getElementById("invalidCity").textContent = !simpleRegExp.test(inputCity.value) ? "Veuillez entrer un nom de ville valide" : "";
     document.getElementById("invalidAdress").textContent = !adressRegExp.test(inputAdress.value) ? "Veuillez entrer une adresse valide" : "";
 
-    if (simpleRegExp.test(inputFname.value) && simpleRegExp.test(inputLname.value) && emailRegExp.test(inputEmail.value) && simpleRegExp.test(inputCity.value) && adressRegExp.test(inputAdress.value)){
-        event.preventDefault()
+    if (storage === null || storage.length === 0){
+        alert("Le panier et vide")
+    }else if (simpleRegExp.test(inputFname.value) && simpleRegExp.test(inputLname.value) && emailRegExp.test(inputEmail.value) && simpleRegExp.test(inputCity.value) && adressRegExp.test(inputAdress.value)){
         const products = storage.map(s => s._id)
         const order = {
             contact : {

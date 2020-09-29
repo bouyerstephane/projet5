@@ -68,16 +68,6 @@ const submit = (id,price) => {
 const addArticle = (id, selectedQuantity, selectedColor) => {
     let basket = JSON.parse(localStorage.getItem("basket"));
 
-    // let totalPrice = JSON.parse(localStorage.getItem("totalPrice"));
-    //
-    //
-    // if (totalPrice === null) {
-    //     totalPrice = [{"price": +price * +selectedQuantity}];
-    // } else{
-    //     totalPrice[0].price += +price * +selectedQuantity;
-    //
-    // }
-
     if (basket === null) {
         basket = [];
     }
@@ -94,12 +84,7 @@ const addArticle = (id, selectedQuantity, selectedColor) => {
         basket.push(article);
     }
 
-
-
-
     localStorage.setItem("basket", JSON.stringify(basket));
-    localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
-
 }
 
 
@@ -114,7 +99,7 @@ const sendTeddy = async (teddies) => {
     });
 
     const data = await response.json();
-
+window.location.href = "validation.html?orderId=" + data.orderId
     console.log(data.orderId);
 };
 

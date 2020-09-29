@@ -12,7 +12,7 @@ const addTeddies = (teddy) => {
         content: "Photo Ourson"
     }, {attribut: "class", content: "imgTeddy"}])
     const pPrice = creatElem("p", "prix : " + price(teddy.price))
-    const a = creatElem("a", "<p>Voir le produit</p>", [{attribut: "href", content: "../produit.html?id=" + teddy._id}])
+    const a = creatElem("a", "<p>Voir le produit</p>", [{attribut: "href", content: "../detail.html?id=" + teddy._id}])
 
     //Ajouts des élements dans une div
     div.appendChild(pName)
@@ -20,7 +20,6 @@ const addTeddies = (teddy) => {
     div.appendChild(img)
     div.appendChild(pPrice)
     div.appendChild(a)
-
     // affiche les div remplis avec les élements
     teddiesDiv.appendChild(div)
 }

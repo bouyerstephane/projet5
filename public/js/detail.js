@@ -35,7 +35,7 @@ const addTeddies = async (teddy) => {
 
         teddiesDiv.appendChild(div)
 
-        submit(teddy._id,teddy.price)
+        submit(teddy._id, teddy.price)
 
 
     }
