@@ -51,7 +51,7 @@ const optionsQuantity = (select, qty) => {
     }
 }
 
-const submit = (id,price) => {
+const submit = (id, price) => {
     const send = document.getElementById("submit");
     send.addEventListener("click", () => {
         const selectColor = document.getElementById("selectColors");
@@ -61,7 +61,7 @@ const submit = (id,price) => {
         const indexQuantity = selectQuantity.selectedIndex;
         const selectedQuantity = selectQuantity.options[indexQuantity].value;
 
-        addArticle(id, selectedQuantity, selectedColor,price)
+        addArticle(id, selectedQuantity, selectedColor, price)
     })
 }
 
@@ -72,18 +72,17 @@ const addArticle = (id, selectedQuantity, selectedColor) => {
         basket = [];
     }
 
-    if (basket.some(articles => articles._id === id && articles.color === selectedColor)){
+    if (basket.some(articles => articles._id === id && articles.color === selectedColor)) {
         basket = basket.map(article => {
-            if (article._id === id && article.color === selectedColor ){
+            if (article._id === id && article.color === selectedColor) {
                 article.qty += +selectedQuantity
             }
             return article
         })
-    }else{
+    } else {
         const article = {"_id": id, "qty": +selectedQuantity, "color": selectedColor}
         basket.push(article);
     }
-
     localStorage.setItem("basket", JSON.stringify(basket));
 }
 
@@ -99,15 +98,14 @@ const sendTeddy = async (teddies) => {
     });
 
     const data = await response.json();
-window.location.href = "validation.html?orderId=" + data.orderId
+    window.location.href = "validation.html?orderId=" + data.orderId
     console.log(data.orderId);
 };
 
-const deleteElementBasket = (id, color) =>{
-   let basket = JSON.parse(localStorage.getItem("basket"));
-
-    if (basket){
-        basket = basket.filter(b => b._id !== id || b.color !== color )
+const deleteElementBasket = (id, color) => {
+    let basket = JSON.parse(localStorage.getItem("basket"));
+    if (basket) {
+        basket = basket.filter(b => b._id !== id || b.color !== color)
         console.log(basket)
         localStorage.setItem("basket", JSON.stringify(basket));
         window.location.reload();

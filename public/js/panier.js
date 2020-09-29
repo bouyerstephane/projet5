@@ -9,34 +9,38 @@ if (storage === null || storage.length === 0) {
 }
 
 const addTeddies = (teddies) => {
-if (storage){
-    storage.map(val => {
-        if (val._id === teddies._id) {
-            teddies.colors.map(colors => {
-                if (val.color === colors) {
-                    const div = creatElem("div", null, [{attribut: "class", content: "divTeddies bg-base"}]);
-                    const p = creatElem("p", teddies.name + "</br> Couleur choisi : " + val.color)
-                    const img = creatElem("img", null, [{attribut: "src", content: teddies.imageUrl}, {attribut: "alt", content: "Photo Ourson"}, {attribut: "class", content: "imgTeddy"}])
-                    const pQty = creatElem("p", "quantité : " + val.qty)
-                    const pPrice = creatElem("p", "prix : " + price(teddies.price, val.qty), [{attribut: "class", content: "price"}])
-                    const remove = creatElem("button", "supprimer", [{attribut: "class", content: "delete bg_base"}])
-                    remove.addEventListener("click" ,() => {
-                        console.log(val.color)
-                        deleteElementBasket(val._id, val.color)
+    if (storage) {
+        storage.map(val => {
+            if (val._id === teddies._id) {
+                teddies.colors.map(colors => {
+                    if (val.color === colors) {
+                        const div = creatElem("div", null, [{attribut: "class", content: "divTeddies bg-base"}]);
+                        const p = creatElem("p", teddies.name + "</br> Couleur choisi : " + val.color)
+                        const img = creatElem("img", null, [{
+                            attribut: "src",
+                            content: teddies.imageUrl
+                        }, {attribut: "alt", content: "Photo Ourson"}, {attribut: "class", content: "imgTeddy"}])
+                        const pQty = creatElem("p", "quantité : " + val.qty)
+                        const pPrice = creatElem("p", "prix : " + price(teddies.price, val.qty), [{attribut: "class", content: "price"
+                        }])
+                        const remove = creatElem("button", "supprimer", [{attribut: "class", content: "delete bg_base"}])
+                        remove.addEventListener("click", () => {
+                            console.log(val.color)
+                            deleteElementBasket(val._id, val.color)
 
-                    })
-                    div.appendChild(p);
-                    div.appendChild(img);
-                    div.appendChild(pQty);
-                    div.appendChild(pPrice);
-                    div.appendChild(remove);
-                    panier.appendChild(div);
+                        })
+                        div.appendChild(p);
+                        div.appendChild(img);
+                        div.appendChild(pQty);
+                        div.appendChild(pPrice);
+                        div.appendChild(remove);
+                        panier.appendChild(div);
 
-                }
-            })
-        }
-    })
-}
+                    }
+                })
+            }
+        })
+    }
 }
 
 const clear = document.getElementById("clear");
@@ -63,17 +67,17 @@ inputSubmit.addEventListener("click", (event) => {
     document.getElementById("invalidCity").textContent = !simpleRegExp.test(inputCity.value) ? "Veuillez entrer un nom de ville valide" : "";
     document.getElementById("invalidAdress").textContent = !adressRegExp.test(inputAdress.value) ? "Veuillez entrer une adresse valide" : "";
 
-    if (storage === null || storage.length === 0){
+    if (storage === null || storage.length === 0) {
         alert("Le panier et vide")
-    }else if (simpleRegExp.test(inputFname.value) && simpleRegExp.test(inputLname.value) && emailRegExp.test(inputEmail.value) && simpleRegExp.test(inputCity.value) && adressRegExp.test(inputAdress.value)){
+    } else if (simpleRegExp.test(inputFname.value) && simpleRegExp.test(inputLname.value) && emailRegExp.test(inputEmail.value) && simpleRegExp.test(inputCity.value) && adressRegExp.test(inputAdress.value)) {
         const products = storage.map(s => s._id)
         const order = {
-            contact : {
-                firstName : inputFname.value,
-                lastName : inputLname.value,
-                address : inputAdress.value,
-                city : inputCity.value,
-                email : inputEmail.value
+            contact: {
+                firstName: inputFname.value,
+                lastName: inputLname.value,
+                address: inputAdress.value,
+                city: inputCity.value,
+                email: inputEmail.value
             },
             products
         }

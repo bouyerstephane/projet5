@@ -17,10 +17,7 @@ const addTeddies = async (teddy) => {
         teddy.colors.map(val => getColors(val, selectColors))
         const selectQuantity = creatElem("select", null, [{attribut: "id", content: "selectQuantities"}])
         optionsQuantity(selectQuantity, 11)
-        const a = creatElem("a", "ajouter au panier", [{attribut: "href", content: "../panier.html"}, {
-            attribut: "id",
-            content: "submit"
-        }]);
+        const a = creatElem("a", "ajouter au panier", [{attribut: "href", content: "../panier.html"}, {attribut: "id", content: "submit"}]);
 
 
         //Ajouts des élements dans une div

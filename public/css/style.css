@@ -42,18 +42,18 @@ button {
     margin: auto;
 }
 
-#clear{
+#clear {
     display: flex;
     margin-bottom: 20px;
 }
 
-label{
+label {
     min-width: 120px;
 }
 
-input{
+input {
     width: 200px;
-    border :solid #e8b573 1px;
+    border: solid #e8b573 1px;
 }
 
 input:focus {
@@ -61,11 +61,11 @@ input:focus {
     border: solid #e8b573 3px;
 }
 
-#submit{
+#submit {
     display: block;
     margin: 0 auto;
 }
 
-.spanError{
+.spanError {
     color: red;
 }
