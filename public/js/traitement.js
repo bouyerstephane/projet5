@@ -2,7 +2,6 @@ const getTeddies = async () => {
     const response = await fetch("/api/teddies/");
     const data = await response.json();
     data.map(val => addTeddies(val));
-    //console.log(data)
 }
 
 const getUrl = async () => {
@@ -11,12 +10,10 @@ const getUrl = async () => {
     const response = await fetch("/api/teddies/" + url.searchParams.get("id"));
     const data = await response.json();
     if (data._id) {
-
         return url.searchParams.get("id");
     } else {
         window.location.href = "error.html";
     }
-
 }
 
 const price = (value, multipl = 1) => {
@@ -51,33 +48,32 @@ const optionsQuantity = (select, qty) => {
     }
 }
 
-const submit = (id, price) => {
-    const send = document.getElementById("submit");
-    send.addEventListener("click", () => {
-        const selectColor = document.getElementById("selectColors");
-        const indexColor = selectColor.selectedIndex;
-        const selectedColor = selectColor.options[indexColor].value;
-        const selectQuantity = document.getElementById("selectQuantities");
-        const indexQuantity = selectQuantity.selectedIndex;
-        const selectedQuantity = selectQuantity.options[indexQuantity].value;
-
-        addArticle(id, selectedQuantity, selectedColor, price)
-    })
+const submit = (id) => {
+    const selectColor = document.getElementById("selectColors");
+    const selectedColor = selectColor.options[selectColor.selectedIndex].value;
+    const selectQuantity = document.getElementById("selectQuantities");
+    const selectedQuantity = selectQuantity.options[selectQuantity.selectedIndex].value;
+    let basket = localStorage.getItem("basket");
+    if (basket !== "") {
+        basket = JSON.parse(localStorage.getItem("basket"))
+        if (basket === null) {
+            basket = [];
+        }
+        basketPush(basket, id, selectedQuantity, selectedColor)
+    }else{
+        localStorage.clear()
+        basket = []
+        basketPush(basket, id, selectedQuantity, selectedColor)
+    }
 }
 
-const addArticle = (id, selectedQuantity, selectedColor) => {
-    let basket = JSON.parse(localStorage.getItem("basket"));
-
-    if (basket === null) {
-        basket = [];
-    }
-
+const basketPush = (basket, id, selectedQuantity, selectedColor) => {
     if (basket.some(articles => articles._id === id && articles.color === selectedColor)) {
         basket = basket.map(article => {
             if (article._id === id && article.color === selectedColor) {
-                article.qty += +selectedQuantity
+                article.qty += +selectedQuantity;
             }
-            return article
+            return article;
         })
     } else {
         const article = {"_id": id, "qty": +selectedQuantity, "color": selectedColor}
@@ -86,28 +82,24 @@ const addArticle = (id, selectedQuantity, selectedColor) => {
     localStorage.setItem("basket", JSON.stringify(basket));
 }
 
-
-const sendTeddy = async (teddies) => {
+const sendOrder = async (teddies) => {
     const response = await fetch('/api/teddies/order', {
         method: 'POST',
-        headers: {
-            'Accept': 'application/json',
+        headers: {'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(teddies)
     });
-
     const data = await response.json();
-    window.location.href = "validation.html?orderId=" + data.orderId
-    console.log(data.orderId);
-};
+    window.location.href = "validation.html?orderId=" + data.orderId;
+}
 
 const deleteElementBasket = (id, color) => {
     let basket = JSON.parse(localStorage.getItem("basket"));
     if (basket) {
-        basket = basket.filter(b => b._id !== id || b.color !== color)
-        console.log(basket)
+        basket = basket.filter(b => b._id !== id || b.color !== color);
         localStorage.setItem("basket", JSON.stringify(basket));
         window.location.reload();
     }
+
 }
