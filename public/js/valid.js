@@ -1,3 +1,4 @@
+//affichage d'un message de validation avec OrderId reçu en paramètre url
 const valid = document.getElementById("validation");
 const strURL = window.location.href;
 const url = new URL(strURL);

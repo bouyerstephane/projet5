@@ -13,7 +13,6 @@ const addTeddies = async (teddy) => {
         const selectQuantity = creatElem("select", null, [{attribut: "id", content: "selectQuantities"}]);
         optionsQuantity(selectQuantity, 11);
         const a = creatElem("a", "ajouter au panier", [{attribut: "href", content: "../panier.html"}, {attribut: "id", content: "submit"}]);
-
         //Ajouts des élements dans une div
         div.appendChild(pName);
         div.appendChild(pDescription);
@@ -24,7 +23,7 @@ const addTeddies = async (teddy) => {
         div.appendChild(a);
         // affiche les div remplis avec les élements
         teddiesDiv.appendChild(div);
-
+        // appel de la fonction "submit" au click sur le bouton
         const send = document.getElementById("submit");
         send.addEventListener("click", () => {
             submit(teddy._id);
